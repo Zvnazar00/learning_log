@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Learning Log</title>
+	<style>
+		body {
+			background-color: #F8F8F8;
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 1.5;
+			color: #333;
+			margin: 0;
+			padding: 0;
+		}
+	header {
+		background-color: #222;
+		color: #FFF;
+		padding: 20px;
+		text-align: center;
+	}
+
+	nav {
+		background-color: #EEE;
+		padding: 10px;
+		text-align: center;
+	}
+
+	nav a {
+		display: inline-block;
+		padding: 10px;
+		color: #333;
+		text-decoration: none;
+		font-weight: bold;
+		border-radius: 5px;
+		margin: 0 10px;
+	}
+
+	nav a:hover {
+		background-color: #333;
+		color: #FFF;
+	}
+
+	.login {
+		float: right;
+	}
+
+	.login a {
+		display: inline-block;
+		padding: 10px;
+		color: #FFF;
+		background-color: #333;
+		text-decoration: none;
+		font-weight: bold;
+		border-radius: 5px;
+		margin: 0 10px;
+	}
+
+	.login a:hover {
+		background-color: #222;
+	}
+
+	.content {
+		padding: 20px;
+	}
+</style>
+</head>
+<body>
+	<header>
+		<h1>Learning Log</h1>
+	</header>
+	<nav>
+		<a href="{% url 'learning_logs:index'%}">Home</a>
+		<a href="{% url 'learning_logs:topics'%}">Topics</a>
+		{% if user.is_authenticated%}
+			<div class="login">
+				Hello, {{user.username}}.
+				<a href="{% url 'users:logout' %}">Log out</a>
+			</div>
+		{% else %}
+			<div class="login">
+				<a href="{% url 'users:register'%}">Register</a>
+				<a href="{% url 'users:login'%}">Log in</a>
+			</div>
+		{% endif %}
+	</nav>
+	<div class="content">
+		{% block content %}{% endblock content%}
+	</div>
+</body>
+</html>
